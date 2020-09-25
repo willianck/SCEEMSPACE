@@ -1,0 +1,136 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/header :: header">
+    <title>Hello</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+<link rel="stylesheet" type="text/css" href="/css/assets/main.css">
+
+<!---------------- header -------------------------------->
+<!-- Header -->
+
+<header id="header">
+    <a class="logo" href="/">SCEEM SPACE</a>
+    <img id="university"  src="/css/images/University_of_Bristol_logo.png/">
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/members">List of Members</a></li>
+        <li><a href="/orders">List of Allocations</a></li>
+        <li><a href = "/locations">List of Locations</a></li>
+        <li><a href ="/members/new">Add new Members</a></li>
+        <li><a href ="/locations/new">Add new Locations</a> </li>
+        <li><a href ="/order">Add new Allocations</a> </li>
+        <li><a th:href="@{/account}">View all accounts</a></li>
+        <li> <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form> </li>
+    </ul>
+</nav>
+
+
+<!-- Heading -->
+<div id="heading" >
+    <h1>DASHBOARD</h1>
+</div>
+<!-------------------------------------end of header and navigation -------------------------------->
+
+<!--------------------------------------start of section-------------------------------------------->
+
+<!-- Highlights -->
+<section class="wrapper">
+    <div class="inner">
+        <div class="highlights">
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="/members/new"><img src="/css/assets/images/add-group.png"  class="icons-pic" alt="image not loading"></a>
+                        <h3>REGISTER MEMBER</h3>
+                    </header>
+                    <p>Register any undergraduate , postgraduate , phd students and staff member to book an office In
+                        one of the SCEEM building.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                       <a href="/locations/new"><img src="/css/assets/images/address.png"  class="icons-pic" alt="image not loading"></a>
+
+                        <!--                        <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>-->
+                        <h3>REGISTER LOCATION</h3>
+                    </header>
+                    <p>Register the person's location in any of our SCEEM building.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="/order"><img src="/css/assets/images/resource.png"  class="icons-pic" alt="image not loading"></a>
+                        <h3>ALLOCATE MEMBER</h3>
+                    </header>
+                    <p>Allocate the members to a specific office.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="/members"><img src="/css/assets/images/search.png"  class="icons-pic" alt="image not loading"></a>
+                        <h3>LIST OF MEMBERS</h3>
+                    </header>
+                    <p>View the Members who currently booked offices in SCEEM space</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="/locations"><img src="/css/assets/images/search.png"  class="icons-pic" alt="image not loading"></a>
+                        <h3>LIST OF LOCATIONS</h3>
+                    </header>
+                    <p>view the locations.</p>
+                </div>
+            </section>
+            <section>
+                <div class="content">
+                    <header>
+                        <a href="/orders"><img src="/css/assets/images/search.png"  class="icons-pic" alt="image not loading"></a>
+                        <h3>LIST OF ALLOCATIONS</h3>
+                    </header>
+                    <p>View the allocations.</p>
+                </div>
+            </section>
+        </div>
+    </div>
+</section>
+
+
+<!------------------------- end of section---------------------------------------------->
+
+<!----------------- beginning of footer----------------->
+<footer id="footer">
+    <div class="inner">
+        <div class="content">
+            <section>
+            </section>
+        </div>
+        <div class="copyright">
+            &copy; University of Bristol <a href="https://www.bristol.ac.uk/"></a>
+        </div>
+    </div>
+</footer>
+<!-----------------------end of footer--------------->
+<script src="/css/assets/js/jquery.min.js"></script>
+<script src="/css/assets/js/browser.min.js"></script>
+<script src="/css/assets/js/breakpoints.min.js"></script>
+<script src="/css/assets/js/util.js"></script>
+<script src="/css/assets/js/main.js"></script>
+
+</body>
+</html>

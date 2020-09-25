@@ -1,0 +1,120 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<link rel="stylesheet" type="text/css" href="/css/assets/main.css">
+<link rel="stylesheet" type="text/css" href="/css/table/css/main.css">
+<!---------------- header -------------------------------->
+<!-- Header -->
+<div class="fl-page">
+<header id="header">
+    <a class="logo" href="/">Sceem space</a>
+    <img id="university"  src="/css/images/University_of_Bristol_logo.png/">
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/members">List of Members</a></li>
+        <li><a href="/orders">List of Allocations</a></li>
+        <li><a href = "/locations">List of Locations</a></li>
+        <li><a href ="/members/new">Add new Members</a></li>
+        <li><a href ="/locations/new">Add new Locations</a> </li>
+        <li><a href ="/order">Add new Allocations</a> </li>
+        <li><a th:href="@{/account}">View all accounts</a></li>
+        <li> <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form> </li>
+    </ul>
+</nav>
+
+<!-- Heading -->
+<div id="heading" >
+    <h1>TABLE OF LOCATIONS</h1>
+</div>
+
+
+    <div class="selection-form">
+        <form th:object="${locationSearch}" class="form-inline">
+            <div class="form-group mb-2">
+                <input type="text" th:field="*{locationName}" class="form-control" placeholder="Building Name"/>
+            </div>
+
+            <div class="form-group mx-sm-1 mb-2">
+                <select th:field="*{roomType}" class="form-control"> <option value="">Room Type</option>
+                    <option th:each="status : ${T(jpabook.jpashop.domain.RoomType).values()}"
+                            th:value="${status}"
+                            th:text="${status}">option
+                    </option>
+                </select>
+            </div>
+            <button type="submit" >Search</button>
+        </form>
+    </div>
+
+        <div class="limiter">
+            <div class="container-table100">
+                <div class="wrap-table100">
+                    <div class="table">
+
+                        <div class="row header">
+                            <div class="cell">
+                                #
+                            </div>
+                            <div class="cell">
+                                Location name
+                            </div>
+                            <div class="cell">
+                                Room type
+                            </div>
+                            <div class="cell">
+                                Left over desk(s) in the room
+                            </div>
+                            <div class="cell">
+                                Action
+                            </div>
+                        </div>
+                        <div class="row" th:each="location : ${#lists.sort(locations, byLocationStockQuantity)}">
+                            <div class="cell" th:text="${location.id}"></div>
+                            <div class="cell" th:text="${location.name}"></div>
+                            <div class="cell" th:text="${location.roomType}"></div>
+                            <div class="cell" th:text="${location.stockQuantity}"></div>
+                            <div class="cell"><a href="#" th:href="@{/locations/{id}/edit (id=${location.id})}" role="button">MODIFY</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+</div><!-- /container -->
+<div class="clear"></div>
+<!----------------- beginning of footer----------------->
+<!----------------- beginning of footer----------------->
+<footer class="page-footer">
+    <div class="copyright-footer">
+        &copy; University of Bristol
+    </div>
+</footer>
+<!-----------------------end of footer--------------->
+<script src="/css/assets/js/jquery.min.js"></script>
+<script src="/css/assets/js/browser.min.js"></script>
+<script src="/css/assets/js/breakpoints.min.js"></script>
+<script src="/css/assets/js/util.js"></script>
+<script src="/css/assets/js/main.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/vendor/bootstrap/js/popper.js"></script>
+<script src="/css/table/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout/layout}"
+      xmlns:layout="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+
+<div class="content-wrapper" layout:fragment="content_body">
+    <span class="helloWorld">Hello World! : </span>
+    <span th:text="${name}" 이름 받을 곳 </span>
+</div>
+
+</body>
+
+</html>

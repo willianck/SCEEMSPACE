@@ -1,0 +1,133 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<link rel="stylesheet" type="text/css" href="/css/assets/main.css">
+
+<div class="fl-page">
+    <div class="menu-wrapper">
+        <header id="header">
+            <a class="logo" href="/">SCEEM SPACE</a>
+            <img id="university"  src="/css/images/University_of_Bristol_logo.png/">
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Nav -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/members">List of Members</a></li>
+                <li><a href="/orders">List of Allocations</a></li>
+                <li><a href = "/locations">List of Locations</a></li>
+                <li><a href ="/members/new">Add new Members</a></li>
+                <li><a href ="/locations/new">Add new Locations</a> </li>
+                <li><a href ="/order">Add new Allocations</a> </li>
+                <li><a th:href="@{/account}">View all accounts</a></li>
+                <li> <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form> </li>
+            </ul>
+        </nav>
+
+        <!-- Heading -->
+        <div id="heading" >
+            <h1>UPDATE REGISTRATION</h1>
+        </div>
+    </div>
+
+<div class="container">
+
+    <form th:object="${memberForm}" method="post"> <!-- id -->
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label th:for="name">Student number</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Student number is essential" />
+        </div>
+
+        <div class="form-group">
+            <label>Priority</label>
+            <select th:field="*{priority}" class="form-control">
+                <option th:value="'A'" th:text="A__Very_Urgent"></option>
+                <option th:value="'B'" th:text="B__Urgent"></option>
+                <option th:value="'C'" th:text="C__Not_Urgent"></option>
+                <option th:value="'X'" th:text="X__Empty_member"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label th:for="email">Email</label>
+            <input type="text" th:field="*{email_address}" class="form-control" placeholder="Email address">
+        </div>
+
+        <div class="form-group">
+            <label th:for="firstName">First Name</label>
+            <input type="text" th:field="*{first_name}" class="form-control" placeholder="First name">
+        </div>
+
+        <div class="form-group">
+            <label th:for="lastName">Last Name</label>
+            <input type="text" th:field="*{last_name}" class="form-control" placeholder="Last name">
+        </div>
+
+        <div class="form-group">
+            <label>Pathway</label>
+            <select th:field="*{pathway}" class="form-control">
+                <option th:value="'Professor'" th:text="Professor"></option>
+                <option th:value="'PhD'" th:text="PhD"></option>
+                <option th:value="'Lecturer'" th:text="Lecturer"></option>
+                <option th:value="'None'" th:text="None"></option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label th:for="department">Department</label>
+            <input type="text" th:field="*{department}" class="form-control" placeholder="EEE, COMS, etc">
+        </div>
+
+        <div class="form-group">
+            <label th:for="groupAllocation">Group Allocation</label>
+            <input type="text" th:field="*{groupAllocation}" class="form-control" placeholder=" ">
+        </div>
+
+        <div class="form-group">
+            <label th:for="role">Role</label>
+            <input type="text" th:field="*{role}" class="form-control" placeholder=" ">
+        </div>
+
+        <div class="form-group">
+            <label th:for="supervisor">Supervisor</label>
+            <input type="text" th:field="*{supervisor}" class="form-control" placeholder=" ">
+        </div>
+
+        <div class="form-group">
+            <label th:for="researchGroup">Research Group</label>
+            <input type="text" th:field="*{researchGroup}" class="form-control" placeholder=" ">
+        </div>
+
+        <div class="form-group">
+            <label th:for="notes">Notes</label>
+            <input type="text" th:field="*{notes}" class="form-control" placeholder=" ">
+        </div>
+
+        <button type="submit" >Submit</button>
+    </form>
+</div> <!-- /container -->
+</div>
+
+<footer class="page-footer">
+    <div class="copyright-footer">
+        &copy; University of Bristol
+    </div>
+</footer>
+<!-----------------------end of footer--------------->
+<script src="/css/assets/js/jquery.min.js"></script>
+<script src="/css/assets/js/browser.min.js"></script>
+<script src="/css/assets/js/breakpoints.min.js"></script>
+<script src="/css/assets/js/util.js"></script>
+<script src="/css/assets/js/main.js"></script>
+
+
+</body>
+</html>

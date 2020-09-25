@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+    <div class = "content-wrapper" layout:fragment="content_body">
+        <h2>Register Account in this page</h2>
+        <h3>This page is only available to administrator</h3>
+
+
+        <form method = "post" th:object="${account}">
+
+            username : <input type = "text" name = "username" th:field = "*{username}">
+            <span th:if = "${#fields.hasErrors('username')}", th:errors="*{username}"></span>
+            <p>
+            </p>
+            password : <input type = "text" name = "password" th:field = "*{password}">
+            <span th:if = "${#fields.hasErrors('password')}", th:errors="*{password}"></span>
+            <p>
+            </p>
+            <input type = "submit">
+        </form>
+
+        <hr>
+        <div th:each="account : ${list}">
+            username : <span th:text = "${account.username}"></span><br>
+            password : <span th:text = "${account.password}"></span>
+        </div>
+
+</div>
+
+</body>
+</html>

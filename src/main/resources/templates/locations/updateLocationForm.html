@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+<link rel="stylesheet" type="text/css" href="/css/assets/main.css">
+
+<!---------------- header -------------------------------->
+<!-- Header -->
+<div class="fl-page">
+    <div class="menu-wrapper">
+        <header id="header">
+            <a class="logo" href="/">SCEEM SPACE</a>
+            <img id="university"  src="/css/images/University_of_Bristol_logo.png/">
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Nav -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/members">List of Members</a></li>
+                <li><a href="/orders">List of Allocations</a></li>
+                <li><a href = "/locations">List of Locations</a></li>
+                <li><a href ="/members/new">Add new Members</a></li>
+                <li><a href ="/locations/new">Add new Locations</a> </li>
+                <li><a href ="/order">Add new Allocations</a> </li>
+                <li><a th:href="@{/account}">View all accounts</a></li>
+                <li> <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form> </li>
+            </ul>
+        </nav>
+
+        <!-- Heading -->
+        <div id="heading" >
+            <h1>UPDATE LOCATION</h1>
+        </div>
+    </div>
+
+<div class="container">
+
+    <form th:object="${locationForm}" method="post"> <!-- id -->
+        <input type="hidden" th:field="*{id}" />
+        <div class="form-group">
+            <label th:for="name">Location name</label>
+            <input type="text" th:field="*{name}" class="form-control" placeholder="Format: Building name.Level(if available).Room number. ex) MVB.L1.418" />
+        </div>
+
+
+        <div class="form-group">
+            <label>Room Type</label>
+            <select th:field="*{roomType}" class="form-control">
+                <option th:value="'INDIVIDUAL'" th:text="INDIVIDUAL"></option>
+                <option th:value="'GROUP'" th:text="GROUP"></option>
+                <option th:value="'EMPTY_SPACE'" th:text="EMPTY_SPACE"></option>
+            </select>
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label th:for="author">Desk number</label>-->
+<!--            <input type="text" th:field="*{author}" class="form-control" placeholder="Desk number" />-->
+<!--        </div>-->
+
+        <div class="form-group">
+            <label th:for="stockQuantity">How many desks</label>
+            <input type="number" th:field="*{stockQuantity}" class="form-control" placeholder="Maximum capacity(desks)" />
+        </div>
+
+<!--        <div class="form-group">-->
+<!--            <label th:for="isbn">Office type</label>-->
+<!--            <input type="text" th:field="*{isbn}" class="form-control" placeholder="Office type" />-->
+<!--        </div>-->
+
+        <button type="submit">Submit</button> </form>
+</div> <!-- /container -->
+</div>
+<footer class="page-footer">
+    <div class="copyright-footer">
+        &copy; University of Bristol
+    </div>
+</footer>
+<!-----------------------end of footer--------------->
+<script src="/css/assets/js/jquery.min.js"></script>
+<script src="/css/assets/js/browser.min.js"></script>
+<script src="/css/assets/js/breakpoints.min.js"></script>
+<script src="/css/assets/js/util.js"></script>
+<script src="/css/assets/js/main.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header"/>
+<body>
+<link rel="stylesheet" type="text/css" href="/css/assets/main.css">
+<link rel="stylesheet" type="text/css" href="/css/table/css/main.css">
+<!---------------- header -------------------------------->
+<!-- Header -->
+<div class="fl-page">
+<header id="header">
+    <a class="logo" href="/">SCEEM SPACE</a>
+    <img id="university"  src="/css/images/University_of_Bristol_logo.png/">
+    <nav>
+        <a href="#menu">Menu</a>
+    </nav>
+</header>
+
+<!-- Nav -->
+<nav id="menu">
+    <ul class="links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/members">List of Members</a></li>
+        <li><a href="/orders">List of Allocations</a></li>
+        <li><a href = "/locations">List of Locations</a></li>
+        <li><a href ="/members/new">Add new Members</a></li>
+        <li><a href ="/locations/new">Add new Locations</a> </li>
+        <li><a href ="/order">Add new Allocations</a> </li>
+        <li><a th:href="@{/account}">View all accounts</a></li>
+        <li> <form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"/>
+        </form> </li>
+    </ul>
+</nav>
+
+<!-- Heading -->
+<div id="heading" >
+    <h1>TABLE OF ALLOCATIONS</h1>
+</div>
+
+<div class="selection-form">
+
+         <div>
+            <form th:object="${orderSearch}" class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberName}" class="form-control" placeholder="Student number"/>
+                </div>
+
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{locationName}" class="form-control" placeholder="Location name"/>
+                </div>
+
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{endDate}" class="form-control" placeholder="End Date"/>
+                </div>
+
+                <div class="form-group mx-sm-1 mb-2">
+                    <select th:field="*{orderStatus}" class="form-control"> <option value="">Allocation status</option>
+                        <option th:each="status : ${T(jpabook.jpashop.domain.OrderStatus).values()}"
+                                th:value="${status}"
+                                th:text="${status}">option
+                        </option>
+                    </select>
+                </div>
+
+                <button type="submit" >Search</button>
+            </form>
+
+        </div>
+</div>
+
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            #
+                        </div>
+                        <div class="cell">Student number</div>
+                        <div class="cell">Building name</div>
+                        <div class="cell">Room type</div>
+                        <div class="cell">Desk number</div>
+                        <div class="cell">End Date</div>
+                        <div class="cell">Final Status</div>
+                        <div class="cell">Time</div>
+                        <div class="cell">Action</div>
+                    </div>
+
+                        <div class="row" th:each="order : ${#lists.sort(orders, byEndDate)}">
+                            <div class="cell" th:text="${order.id}"></div>
+                            <div class="cell" th:text="${order.member.name}"></div>
+                            <div class="cell" th:text="${order.orderItems[0].location.name}"></div>
+                            <div class="cell" th:text="${order.orderItems[0].roomType}"></div>
+                            <div class="cell" th:text="${order.orderItems[0].deskNumber}"></div>
+                            <div class="cell" th:text="${order.orderItems[0].endDate}"></div>
+                            <div class="cell" th:text="${order.status}"></div>
+                            <div class="cell" th:text="${order.allocatedDate}"></div>
+                            <div class="cell"><a th:if="${order.status.name() == 'ALLOCATED'}" href="#"
+                                   th:href="'javascript:cancel('+${order.id}+')'"
+                                   class="btn btn-danger">CANCEL</a></div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+<!-- /container -->
+<div class="clear"></div>
+<!----------------- beginning of footer----------------->
+<footer class="page-footer">
+        <div class="copyright-footer">
+            &copy; University of Bristol
+        </div>
+</footer>
+<!-----------------------end of footer--------------->
+<script src="/css/assets/js/jquery.min.js"></script>
+<script src="/css/assets/js/browser.min.js"></script>
+<script src="/css/assets/js/breakpoints.min.js"></script>
+<script src="/css/assets/js/util.js"></script>
+<script src="/css/assets/js/main.js"></script>
+
+    <script src="/css/table/vendor/jquery/jquery-3.2.1.min.js"></script>
+    <script src="/css/table/vendor/bootstrap/js/popper.js"></script>
+    <script src="/css/table/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/css/table/vendor/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/css/table/js/main.js"></script>
+
+</body>
+
+<script>
+    function cancel(id) {
+        var form = document.createElement("form");
+        form.setAttribute("method", "post");
+        form.setAttribute("action", "/orders/" + id + "/cancel");
+        document.body.appendChild(form);
+        form.submit();
+    }
+</script>
+</html>

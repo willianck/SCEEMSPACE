@@ -1,0 +1,176 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments/header :: header" />
+<body>
+
+<link rel="stylesheet" type="text/css" href="/css/assets/main.css">
+<link rel="stylesheet" type="text/css" href="/css/table/css/main.css">
+<link rel="stylesheet" type="text/css" href="/css/table/css/util.css">
+
+
+<div class="fl-page">
+    <!-- Header -->
+    <div class="menu-wrapper">
+        <header id="header">
+            <a class="logo" href="/">SCEEM SPACE</a>
+            <img id="university"  src="/css/images/University_of_Bristol_logo.png/">
+            <nav>
+                <a href="#menu">Menu</a>
+            </nav>
+        </header>
+
+        <!-- Nav -->
+        <nav id="menu">
+            <ul class="links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/members">List of Members</a></li>
+                <li><a href="/orders">List of Allocations</a></li>
+                <li><a href = "/locations">List of Locations</a></li>
+                <li><a href ="/members/new">Add new Members</a></li>
+                <li><a href ="/locations/new">Add new Locations</a> </li>
+                <li><a href ="/order">Add new Allocations</a> </li>
+                <li><a th:href="@{/account}">View all accounts</a></li>
+                <li> <form th:action="@{/logout}" method="post">
+                    <input type="submit" value="Sign Out"/>
+                </form> </li>
+            </ul>
+        </nav>
+        <!-- Heading -->
+        <div id="heading" >
+            <h1>MEMBERS IN ORDER OF PRIORITY</h1>
+        </div>
+    </div>
+
+<div class="selection-form">
+    <p class="important-case">Note : Use 'empty member' to create a new member by modifying</p>
+        <a th:href="@{/members/new}">Register a member</a>
+        <div>
+            <form th:object="${memberSearch}" class="form-inline">
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberName}" class="form-control" placeholder="Student number"/>
+                </div>
+
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberPriority}" class="form-control" placeholder="Priority"/>
+                </div>
+
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberDepartment}" class="form-control" placeholder="Department"/>
+                </div>
+
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberPathway}" class="form-control" placeholder="Pathway"/>
+                </div>
+
+                <div class="form-group mb-2">
+                    <input type="text" th:field="*{memberGroup}" class="form-control" placeholder="Group"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-2">Search</button>
+            </form>
+        </div>
+</div>
+    <!----------------------------- MY TABLE ------------------------------------>
+    <div class="limiter">
+        <div class="container-table100">
+            <div class="wrap-table100">
+                <div class="table">
+
+                    <div class="row header">
+                        <div class="cell">
+                            #
+                        </div>
+                        <div class="cell">
+                            <div><a class="key-cell" th:href="@{/members}">Student Number</a></div>
+                        </div>
+                        <div class="cell">
+                            <div><a class ="key-cell" th:href="@{/members/byPriority}">Priority</a></div>
+                        </div>
+                        <div class="cell">
+                            Email
+                        </div>
+                        <div class="cell">
+                            First name
+                        </div>
+                        <div class="cell">
+                            Last name
+                        </div>
+                        <div class="cell">
+                            Pathway
+                        </div>
+                        <div class="cell">
+                            Department
+                        </div>
+                        <div class="cell">
+                            Group Allocation
+                        </div>
+                        <div class="cell">
+                            Role
+                        </div>
+                        <div class="cell">
+                            Supervisor
+                        </div>
+                        <div class="cell">
+                            Research Group
+                        </div>
+                        <div class="cell">
+                            Notes
+                        </div>
+                        <div class="cell">
+                            Action
+                        </div>
+
+                    </div>
+                    <div class="row" th:each="member : ${#lists.sort(members, byPriority)}">
+                        <div class="cell" th:text="${member.id}"></div>
+                        <div class="cell" th:text="${member.name}"></div>
+                        <div class="cell" th:text="${member.priority}"></div>
+                        <div class="cell" th:text="${member.email_address}"></div>
+                        <div class="cell" th:text="${member.first_name}"></div>
+                        <div class="cell" th:text="${member.last_name}"></div>
+                        <div class="cell" th:text="${member.pathway}"></div>
+                        <div class="cell" th:text="${member.department}"></div>
+                        <div class="cell" th:text="${member.groupAllocation}"></div>
+                        <div class="cell" th:text="${member.role}"></div>
+                        <div class="cell" th:text="${member.supervisor}"></div>
+                        <div class="cell" th:text="${member.researchGroup}"></div>
+                        <div class="notes" th:text="${member.notes}" ></div>
+                        <div class ="cell" > <a href="#" th:href="@{/members/{id}/edit (id=${member.id})}" role="button">MODIFY</a></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-------------------------------END OF TABLE------------------------------->
+
+
+</div> <!-- /container -->
+<div class="clear"></div>
+<!----------------- beginning of footer----------------->
+<footer class="page-footer">
+    <div class="copyright-footer">
+        &copy; University of Bristol
+    </div>
+</footer>
+<!-----------------------end of footer--------------->
+<script src="/css/assets/js/jquery.min.js"></script>
+<script src="/css/assets/js/browser.min.js"></script>
+<script src="/css/assets/js/breakpoints.min.js"></script>
+<script src="/css/assets/js/util.js"></script>
+<script src="/css/assets/js/main.js"></script>
+
+
+<!--===============================================================================================-->
+<script src="/css/table/vendor/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/vendor/bootstrap/js/popper.js"></script>
+<script src="/css/table/vendor/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/vendor/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+<script src="/css/table/js/main.js"></script>
+
+</body>
+</html>
